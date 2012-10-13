@@ -27,7 +27,7 @@ protected
   def authenticate
     unless signed_in?
       flash[:error] = "You must sign in first!"
-      redirect_to root_path
+      redirect_to home_path
     end
   end
 
