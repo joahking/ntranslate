@@ -1,5 +1,5 @@
 !!!
-%html
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title= content_for?(:title) ? yield(:title) : "Ntranslate"
@@ -9,17 +9,55 @@
         = csrf_meta_tags
         = yield(:head)
   %body
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
-    #main{:role => "main"}
-      .container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
-          %footer
-      / ! end of .container
-    / ! end of #main
+    .main
+      .blok_header
+        .header
+          .click
+            - if user_signed_in?
+              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+            - else
+              = link_to 'Login', new_user_session_path
+            |
+            - if user_signed_in?
+              = link_to 'Edit account', edit_user_registration_path
+            - else
+              = link_to 'Sign up', new_user_registration_path
+          .clr
+          .logo
+            %a{:href => "index.html"}
+              %img{:alt => "logo", :border => "0", :height => "85", :src => image_path("logo.gif"), :width => "324"}/
+          .search
+            %form#form1{:action => "", :method => "post", :name => "form1"}
+              %label
+                %span
+                  %input#textfield.keywords{:maxlength => "50", :name => "q", :type => "text", :value => "Search..."}/
+                %input.button{:name => "b", :src => image_path("search.gif"), :type => "image"}/
+          .clr
+          .menu_resize
+            .menu
+              = render 'layouts/navigation'
+            .clr
+          .clr
+        .clr
+      .clr
+      .header_text_bg
+        .header_text
+          .gallery
+            GALLERY
+          .clr
+        .clr
+      .body_resize
+        .body
+          = render 'layouts/messages'
+          = yield
+    .footer
+      .footer_resize
+        %a{:href => "#"}
+          %img{:alt => "picture", :border => "0", :height => "66", :src => image_path("footer_logo.gif"), :width => "217"}/
+        %p.leftt
+          © Copyright 2009. Your Site Name Dot Com. All Rights Reserved
+          %br/
+          Home | Contact | RSS
+          %a{:href => "#"} Design by DreamTemplate
+        .clr
+      .clr
