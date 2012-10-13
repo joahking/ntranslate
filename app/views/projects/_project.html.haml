@@ -1,5 +1,5 @@
 = link_to project.name, project
-TODO: 8 texts to translate
+= "#{pluralize(project.text_resources.count, "text")} to translate"
 %br
 = link_to 'Start translating', project_translate_path(project)
 - if can? :manage, Project

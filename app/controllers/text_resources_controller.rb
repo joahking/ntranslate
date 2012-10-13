@@ -15,11 +15,15 @@ class TextResourcesController < ApplicationController
   # GET /text_resources/1
   # GET /text_resources/1.json
   def show
-    @text_resource = if params[:first] 
-                       @projects.text_resources.first
+    @text_resource = if params[:first]
+                       #TODO it should be actually first one not translated
+                       @project.text_resources.first
                      else
-                       @projects.text_resources.find(params[:id])
+                       @project.text_resources.find(params[:id])
                      end
+
+    #TODO take the user's locale
+    #@translation = @text_resource.translations.first # .where(:locale => current_user.locale)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,7 +44,12 @@ class TextResourcesController < ApplicationController
 
   # GET /text_resources/1/edit
   def edit
-    @text_resource = TextResource.find(params[:id])
+    @text_resource = if params[:first]
+                       #TODO it should be actually first one not translated
+                       @project.text_resources.first
+                     else
+                       @project.text_resources.find(params[:id])
+                     end
   end
 
   # POST /text_resources

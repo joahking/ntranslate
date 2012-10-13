@@ -1,6 +1,9 @@
 %p#notice= notice
 
-
+= @text_resource.key
+%br
+= @text_resource.content
+%br
 = link_to 'Edit', edit_project_text_resource_path(@project, @text_resource)
 \|
 = link_to 'Back', project_text_resources_path(@project)

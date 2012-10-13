@@ -3,7 +3,7 @@ Ntranslate::Application.routes.draw do
 
   resources :projects do
     resources :text_resources
-    get "translate" => 'text_resources#show', :first => true
+    get "translate" => 'text_resources#translate', :first => true
   end
 
   match '/auth/:provider/callback', :to => 'sessions#create'
