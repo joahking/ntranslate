@@ -2,7 +2,7 @@
 # Users
 #
 
-User.connection.execute('TRUNCATE TABLE users')
+User.delete_all
 
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
@@ -16,7 +16,7 @@ puts 'New user created: ' << user2.name
 # Languages
 #
 
-Language.connection.execute('TRUNCATE TABLE languages')
+Language.delete_all
 
 { :aa => "Afar",
   :ab => "Abkhazian",
