@@ -9,10 +9,12 @@
 
   - @projects.in_groups_of(2) do |projects|
     %tr{ :class => cycle("odd", "even") }
-      %td{ :class => :left }
-        = render "project", :project => projects.first
-      %td{ :class => :right }
-        = render "project", :project => projects.last
+      - if projects.first
+        %td{ :class => :left }
+          = render "project", :project => projects.first
+      - if projects.last
+        %td{ :class => :right }
+          = render "project", :project => projects.last
 
 %br
 
