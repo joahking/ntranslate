@@ -1,19 +1,21 @@
 @charset "utf-8"
 
-body
+*
   margin: 0
+  padding: 0
+
+body
   padding: 0
   width: 100%
   background: #f5f5f5
-
-html
-  padding: 0
-  margin: 0
 
 a
   text-decoration: none
   &:hover
     text-decoration: underline
+    background-color: transparent
+ul
+  list-style: none
 
 /* main
 
@@ -24,15 +26,12 @@ a
 /********** header *********
 
 .blok_header
-  margin: 0
-  padding: 0
   background: url(<%= asset_path 'header_bg.gif' %>) top repeat-x
   overflow: hidden
 
 .header
   width: 960px
   margin: 0 auto
-  padding: 0
   overflow: hidden
   position: relative
 
@@ -89,47 +88,29 @@ a
 /* logo
 
 .logo
-  padding: 0
   width: 324px
   margin-bottom: 36px
 
 
-/* menu
-
-.menu_resize
+.menu
   bottom: 0
   position: absolute
   width: 960px
 
-
-
-.menu
-  padding: 0
-  margin: 0
-  width: 400px
-  float: left
   ul
-    padding: 0
     margin: 0
-    list-style: none
-    border: 0
-    float: left
     li
       float: left
-      margin: 0
-      padding: 0
-      border: 0
+      padding: 10px 20px 11px 20px
+      color: #000
+      font: normal 10px Arial, Helvetica, sans-serif
+
+      &:hover, &.active
+        
+        background: #ff0090
+        border-top: 2px solid #000
       a
-        float: left
-        margin: 0
-        padding: 10px 20px 11px 20px
-        color: #000
-        font: normal 10px Arial, Helvetica, sans-serif
-        text-decoration: none
-        &:hover, &.active
-          color: #fff
-          background: #ff0090
-          border-top: 2px solid #000
+        color: #fff
 
 /* search
 
@@ -196,17 +177,11 @@ a
     padding: 5px 10px 10px 0
     margin: 0
 
-/********** body *********
-
-.body_resize
-  margin: 0
-  padding: 0
-
 .body
   width: 960px
   margin: 0 auto
   padding: 10px 10px
-  border-top: 1px solid #717171
+
   h2
     border-bottom: 1px solid #dfdfdf
     font: normal 18px Arial, Helvetica, sans-serif
