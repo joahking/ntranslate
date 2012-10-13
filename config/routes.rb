@@ -9,7 +9,7 @@ Ntranslate::Application.routes.draw do
     resources :text_resources
     member do
       get "export", :to => "exports#index"
-      scope ':locale' do
+      scope ':locale', :constraints => {:locale => /[a-z]{2}/} do
         resources :translations, :only => [:index, :create]
       end
     end

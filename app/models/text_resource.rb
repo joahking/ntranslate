@@ -19,4 +19,30 @@ class TextResource < ActiveRecord::Base
   def original_content
     content_for(master_language)
   end
+
+  after_save :expire
+
+  alias_method :orig_content=, :content=
+
+  def content=(value)
+    changed_languages << I18n.locale.to_s
+    self.orig_content = value
+  end
+
+  def expire
+    if changed_languages.include?(master_language)
+      translations.select {|x| x.locale != master_language }.each do |t|
+        t.update_attribute(:translated, false)
+      end
+    end
+    changed_languages.each do |language|
+      translation = translations.detect { |t| t.locale == language }
+      translation.update_attribute(:translated, true)
+    end
+  end
+
+  def changed_languages
+    @changed_languages ||= []
+  end
+
 end
