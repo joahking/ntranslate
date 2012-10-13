@@ -1,4 +1,6 @@
 Ntranslate::Application.routes.draw do
+  resources :user_projects
+
   resources :users
 
   resources :projects do

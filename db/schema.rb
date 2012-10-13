@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013141650) do
+ActiveRecord::Schema.define(:version => 20121013153621) do
 
   create_table "identities", :force => true do |t|
     t.string   "provider"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20121013141650) do
   end
 
   add_index "text_resources", ["project_id", "key"], :name => "index_text_resources_on_project_id_and_key", :unique => true
+
+  create_table "user_projects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_projects", ["user_id", "project_id"], :name => "index_user_projects_on_user_id_and_project_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false

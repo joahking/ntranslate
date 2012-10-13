@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @user_project.user
+%p
+  %b Project:
+  = @user_project.project
+
+= link_to 'Edit', edit_user_project_path(@user_project)
+\|
+= link_to 'Back', user_projects_path
