@@ -23,6 +23,10 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 
 gem 'capistrano'
 
+group :development do
+  gem 'thin'
+end
+
 group :test do
   gem 'database_cleaner'
 end

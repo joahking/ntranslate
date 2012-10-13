@@ -1,10 +1,12 @@
 Ntranslate::Application.routes.draw do
-  resources :projects
+  devise_for :users
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'projects#index'
+
+    resources :users
+    resources :projects
   end
+
   root :to => "home#index"
-  devise_for :users
-  resources :users
 end
