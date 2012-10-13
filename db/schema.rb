@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013061455) do
+ActiveRecord::Schema.define(:version => 20121013062143) do
+
+  create_table "languages", :force => true do |t|
+    t.string "name"
+    t.string "iso_code"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
