@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
 protected
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= if Rails.env.development?
+                        User.first
+                      else
+                        User.find_by_id(session[:user_id])
+                      end
   end
 
   def signed_in?
