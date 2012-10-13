@@ -4,5 +4,7 @@
   .form-inputs
     = f.input :name
 
+    = f.association :languages, :as => :check_boxes
+
   .form-actions
     = f.button :submit

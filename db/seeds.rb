@@ -2,7 +2,7 @@
 # Users
 #
 
-User.connection.execute('TRUNCATE TABLE users')
+User.delete_all
 
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
@@ -16,7 +16,7 @@ puts 'New user created: ' << user2.name
 # Languages
 #
 
-Language.connection.execute('TRUNCATE TABLE languages')
+Language.delete_all
 
 { :aa => "Afar",
   :ab => "Abkhazian",
@@ -162,3 +162,58 @@ Language.connection.execute('TRUNCATE TABLE languages')
   :zu => "Zulu" }.each do |iso_code, name|
     Language.create!(iso_code: iso_code, name: name)
   end
+
+#
+# Projects / Language Assignments
+#
+
+Project.delete_all
+LanguageAssignment.delete_all
+
+LANGUAGES = %w{en es de}
+MASTER_LANGUAGE = "en"
+
+master_language = Language.find_by_iso_code(MASTER_LANGUAGE)
+project = Project.create! :name => "Devise"
+
+LANGUAGES.each do |language|
+  la = project.language_assignments.new
+  la.language = Language.find_by_iso_code(language)
+  la.master_language = master_language# unless language == MASTER_LANGUAGE
+  la.save!
+end
+
+#
+# Text Resources / Translations
+#
+
+TextResource.delete_all
+Translation.delete_all
+
+module Foo
+  def self.get_names(hash={}, options={})
+    options[:names] ||= {}
+
+    hash.each do |k,v|
+      prefix = options[:prefix] ? [options[:prefix], k].join(".") : k
+
+      if v.kind_of? Hash
+        get_names v, options.merge(:prefix => prefix)
+      else
+        options[:names][prefix] = v
+      end
+    end
+
+    options[:names]
+  end
+end
+
+LANGUAGES.each do |language|
+  text_resources = Foo.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
+  lang = Language.find_by_iso_code(language)
+
+  text_resources.each do |k, v|
+    tr = TextResource.find_or_create_by_key_and_project_id!(k, project.id)
+    tr.translations.create!(content: v, language_id: lang.id)
+  end
+end
