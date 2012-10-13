@@ -20,6 +20,7 @@ gem "simple_form", ">= 2.0.4"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem 'omniauth-github'
 gem 'cancan'
+gem 'tabs_on_rails'
 
 gem 'capistrano'
 gem 'puret'

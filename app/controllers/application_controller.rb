@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :authenticate
+  before_filter :set_tabs
 
 protected
 
@@ -29,6 +30,10 @@ protected
       flash[:error] = "You must sign in first!"
       redirect_to home_path
     end
+  end
+
+  def set_tabs
+    set_tab controller_name
   end
 
 end
