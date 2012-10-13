@@ -23,6 +23,7 @@ gem 'cancan'
 
 gem 'capistrano'
 gem 'puret'
+gem 'rubyzip'
 
 group :development do
   gem 'thin'

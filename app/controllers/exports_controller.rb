@@ -1,11 +1,14 @@
+require 'zip/zip'
+
 class ExportsController < ApplicationController
   before_filter :find_project
 
-  respond_to :json, :yml
+  respond_to :json, :yaml
 
   def index
     respond_to do |format|
       format.json { render :json => project_as_json }
+      format.yaml { send_data project_as_yml, :filename => "#{@project.name}.zip" }
     end
   end
 
@@ -17,6 +20,17 @@ class ExportsController < ApplicationController
 
   def project_as_json
     project_hash.as_json
+  end
+
+  def project_as_yml
+    stringio = Zip::ZipOutputStream::write_buffer do |zio|
+      project_hash.each do |lang, content|
+        zio.put_next_entry("#{lang}.yml")
+        zio.write YAML::dump({ lang => content} )
+      end
+    end
+    stringio.rewind
+    stringio.sysread
   end
 
   def project_hash
