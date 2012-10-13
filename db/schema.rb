@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013071509) do
+ActiveRecord::Schema.define(:version => 20121013072457) do
 
   create_table "language_assignments", :force => true do |t|
     t.integer "project_id"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(:version => 20121013071509) do
 
   add_index "text_resources", ["key"], :name => "index_text_resources_on_key", :unique => true
   add_index "text_resources", ["project_id"], :name => "index_text_resources_on_project_id"
+
+  create_table "translations", :force => true do |t|
+    t.integer  "text_resource_id"
+    t.integer  "language_id"
+    t.text     "content"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "translations", ["text_resource_id"], :name => "index_translations_on_text_resource_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
