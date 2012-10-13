@@ -1,4 +1,5 @@
 class TextResourcesController < ApplicationController
+  before_filter :authorize
   before_filter :find_project
 
   # GET /text_resources
@@ -93,4 +94,9 @@ class TextResourcesController < ApplicationController
   def find_project
     @project = Project.find(params[:project_id])
   end
+
+  def authorize
+    authorize! :manage, TextResource
+  end
+
 end
