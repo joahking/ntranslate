@@ -6,6 +6,7 @@ Ntranslate::Application.routes.draw do
   resources :projects do
     resources :text_resources
     member do
+      get "export", :to => "exports#index"
       scope ':locale' do
         resources :translations, :only => [:index, :create]
       end
