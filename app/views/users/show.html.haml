@@ -1,5 +1,22 @@
-%h3 User
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+%h3
+  = "User #{@user.name}"
+
+.left
+  %p
+    = image_tag @user.avatar, :alt => @user.name
+  %p
+    Email: #{@user.email if @user.email}
+    %br
+    Translates: TODO add user locale
+
+.right
+  %h4 Projects
+  - if @user.projects.present?
+    %ul
+      - @user.projects.each do |project|
+        %li
+          = link_to project.name, project
+  - else
+    No projects assigned
+
+  = link_to "Assign projects", new_user_project_path(@user)
