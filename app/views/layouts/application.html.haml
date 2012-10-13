@@ -36,9 +36,10 @@
           .menu
             = render 'layouts/navigation'
 
-      .body
-        = render 'layouts/messages'
-        = yield
+      .body-wrapper
+        .body
+          = render 'layouts/messages'
+          = yield
     .footer
       .footer_resize
         %a{:href => "#"}
