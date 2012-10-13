@@ -27,19 +27,14 @@
             %a{:href => root_url}
               nTranslate
 
-          .search
-            %form#form1{:action => "", :method => "post", :name => "form1"}
-              %label
-                %span
-                  %input#textfield.keywords{:maxlength => "50", :name => "q", :type => "text", :value => "Search..."}/
-                %input.button{:name => "b", :src => image_path("search.gif"), :type => "image"}/
           .menu
             = render 'layouts/navigation'
 
       .body-wrapper
         .body
-          = render 'layouts/messages'
-          = yield
+          .content
+            = render 'layouts/messages'
+            = yield
     .footer
       .footer_resize
         %a{:href => "#"}
