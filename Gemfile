@@ -20,3 +20,10 @@ gem "devise", ">= 2.1.2"
 gem "devise_invitable", ">= 1.0.3"
 gem "simple_form", ">= 2.0.4"
 gem "quiet_assets", ">= 1.0.1", :group => :development
+
+gem 'capistrano'
+
+group :production do
+  gem 'mysql2' # If using mysql in development, this can be outside the production group.
+  gem 'therubyracer'
+end
