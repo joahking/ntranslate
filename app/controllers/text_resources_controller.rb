@@ -15,7 +15,11 @@ class TextResourcesController < ApplicationController
   # GET /text_resources/1
   # GET /text_resources/1.json
   def show
-    @text_resource = TextResource.find(params[:id])
+    @text_resource = if params[:first] 
+                       @projects.text_resources.first
+                     else
+                       @projects.text_resources.find(params[:id])
+                     end
 
     respond_to do |format|
       format.html # show.html.erb
