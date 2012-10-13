@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013133450) do
+ActiveRecord::Schema.define(:version => 20121013141650) do
 
   create_table "identities", :force => true do |t|
     t.string   "provider"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20121013133450) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.string   "avatar"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

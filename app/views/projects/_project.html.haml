@@ -2,7 +2,8 @@
 TODO: 8 texts to translate
 %br
 = link_to 'Start translating', project_translate_path(project)
-&nbsp; 
-= link_to 'Edit', edit_project_path(project)
-&nbsp; 
-= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+- if can? :manage, Project
+  &nbsp; 
+  = link_to 'Edit', edit_project_path(project)
+  &nbsp; 
+  = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }

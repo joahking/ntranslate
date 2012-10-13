@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  before_filter :authorize, :except => [:index]
+
   # GET /projects
   # GET /projects.json
   def index
@@ -81,4 +83,11 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+
+  def authorize
+    authorize! :manage, Project
+  end
+
 end
