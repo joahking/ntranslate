@@ -21,6 +21,7 @@ gem "devise_invitable", ">= 1.0.3"
 gem "simple_form", ">= 2.0.4"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem 'omniauth-github'
+gem 'cancan'
 
 gem 'capistrano'
 gem 'puret'
