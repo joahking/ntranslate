@@ -7,6 +7,8 @@ module ResourceNameExtractor
 
       if v.kind_of? Hash
         get_names v, options.merge(:prefix => prefix)
+      elsif v.kind_of? Array
+        options[:names][prefix] = v.join("\n")
       else
         options[:names][prefix] = v
       end
