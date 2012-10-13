@@ -10,21 +10,24 @@
         = yield(:head)
   %body
     .main
-      .blok_header
+      .click.login-wrapper
+        .login
+          - if user_signed_in?
+            = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+          - else
+            = link_to 'Login', new_user_session_path
+          |
+          - if user_signed_in?
+            = link_to 'Edit account', edit_user_registration_path
+          - else
+            = link_to 'Sign up', new_user_registration_path
+
+      .header-wrapper
         .header
-          .click
-            - if user_signed_in?
-              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
-            - else
-              = link_to 'Login', new_user_session_path
-            |
-            - if user_signed_in?
-              = link_to 'Edit account', edit_user_registration_path
-            - else
-              = link_to 'Sign up', new_user_registration_path
           .logo
             %a{:href => root_url}
-              %img{:alt => "logo", :border => "0", :height => "85", :src => image_path("logo.gif"), :width => "324"}/
+              nTranslate
+
           .search
             %form#form1{:action => "", :method => "post", :name => "form1"}
               %label
@@ -35,6 +38,7 @@
             = render 'layouts/navigation'
 
       .body
+        ajkhd asjd hasjd asjd sakjdh sakjd a
         = render 'layouts/messages'
         = yield
     .footer
