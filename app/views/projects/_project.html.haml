@@ -1,7 +1,10 @@
 = link_to project.name, project
 = "#{pluralize(project.text_resources.count, "text")} to translate"
 %br
-= link_to 'Start translating', project_translate_path(project)
+
+- for language in project.languages
+  = render :partial => "language", :locals => { :project => project, :language => language }
+
 - if can? :manage, Project
   &nbsp; 
   = link_to 'Edit', edit_project_path(project)
