@@ -5,7 +5,10 @@ Ntranslate::Application.routes.draw do
     root :to => 'projects#index'
 
     resources :users
-    resources :projects
+
+    resources :projects do
+      resources :text_resources
+    end
   end
 
   root :to => "home#index"

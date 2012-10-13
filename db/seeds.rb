@@ -174,15 +174,15 @@ LANGUAGES = %w{en es de}
 MASTER_LANGUAGE = "en"
 
 master_language = Language.find_by_iso_code(MASTER_LANGUAGE)
-project = Project.create! :name => "Devise"
+project = Project.new :name => "Devise"
 
 LANGUAGES.each do |language|
   la = project.language_assignments.new
   la.language = Language.find_by_iso_code(language)
   la.master_language = master_language# unless language == MASTER_LANGUAGE
-  la.save!
 end
 
+project.save!
 #
 # Text Resources / Translations
 #
