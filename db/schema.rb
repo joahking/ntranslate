@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013072457) do
+ActiveRecord::Schema.define(:version => 20121013110536) do
 
   create_table "language_assignments", :force => true do |t|
     t.integer "project_id"
@@ -39,8 +39,7 @@ ActiveRecord::Schema.define(:version => 20121013072457) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "text_resources", ["key"], :name => "index_text_resources_on_key", :unique => true
-  add_index "text_resources", ["project_id"], :name => "index_text_resources_on_project_id"
+  add_index "text_resources", ["project_id", "key"], :name => "index_text_resources_on_project_id_and_key", :unique => true
 
   create_table "translations", :force => true do |t|
     t.integer  "text_resource_id"
