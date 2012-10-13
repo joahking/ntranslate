@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013110536) do
+ActiveRecord::Schema.define(:version => 20121013115112) do
   create_table "identities", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(:version => 20121013110536) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "language_assignments", :force => true do |t|
-    t.integer "project_id"
-    t.integer "language_id"
-    t.integer "master_language_id"
-  end
-
-  add_index "language_assignments", ["project_id"], :name => "index_language_assignments_on_project_id"
-
   create_table "languages", :force => true do |t|
     t.string "name"
     t.string "iso_code"
@@ -35,8 +27,10 @@ ActiveRecord::Schema.define(:version => 20121013110536) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "master_language"
+    t.text     "languages"
   end
 
   create_table "text_resources", :force => true do |t|
@@ -50,10 +44,10 @@ ActiveRecord::Schema.define(:version => 20121013110536) do
 
   create_table "translations", :force => true do |t|
     t.integer  "text_resource_id"
-    t.integer  "language_id"
     t.text     "content"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "language"
   end
 
   add_index "translations", ["text_resource_id"], :name => "index_translations_on_text_resource_id"
