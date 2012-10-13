@@ -4,6 +4,10 @@
   %b Name:
   = @project.name
 
+= link_to 'Export as YAML', export_project_path(@project, :format => 'yaml') if can? :manage, Project
+\|
+= link_to 'Export as JSON', export_project_path(@project, :format => 'json') if can? :manage, Project
+\|
 = link_to 'Edit', edit_project_path(@project) if can? :manage, Project
 \|
 = link_to 'Back', projects_path
