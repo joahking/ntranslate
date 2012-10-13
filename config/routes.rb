@@ -9,5 +9,5 @@ Ntranslate::Application.routes.draw do
   match '/auth/:provider/callback', :to => 'sessions#create'
   match "/signout" => "sessions#destroy", :as => :signout
 
-  root :to => "home#index"
+  root :to => "projects#index"
 end
