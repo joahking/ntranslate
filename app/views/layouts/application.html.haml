@@ -12,15 +12,14 @@
     .main
       .click.login-wrapper
         .login
-          - if user_signed_in?
-            = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+          - if signed_in?
+            = welcome_user
+            |
+            = link_to "Sign out", signout_path
           - else
-            = link_to 'Login', new_user_session_path
-          |
-          - if user_signed_in?
-            = link_to 'Edit account', edit_user_registration_path
-          - else
-            = link_to 'Sign up', new_user_registration_path
+            %a{:href => "/auth/github", :class => "auth_provider"}
+              Sign in with Github
+              = image_tag "github_32.png", :size => "32x32", :alt => "Github"
 
       .header-wrapper
         .header
