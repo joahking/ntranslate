@@ -2,7 +2,7 @@
   %li.active
     = link_to "Ntranslate", root_path, :class => 'brand'
 
-    - if @project
+    - if @project && @project.persisted?
       %li
         = link_to @project.name, project_path(@project), :class => 'brand'
 
