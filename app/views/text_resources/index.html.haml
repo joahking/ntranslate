@@ -8,10 +8,11 @@
 
   - @text_resources.each do |text_resource|
     %tr
-      %td= link_to 'Show', text_resource
-      %td= link_to 'Edit', edit_text_resource_path(text_resource)
-      %td= link_to 'Destroy', text_resource, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= text_resource.key
+      %td= link_to 'Show', project_text_resource_path(@project, text_resource)
+      %td= link_to 'Edit', edit_project_text_resource_path(@project, text_resource)
+      %td= link_to 'Destroy', project_text_resource_path(@project, text_resource), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Text resource', new_text_resource_path
+= link_to 'New Text resource', new_project_text_resource_path(@project)

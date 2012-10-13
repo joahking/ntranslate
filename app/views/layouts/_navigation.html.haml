@@ -1,3 +1,6 @@
 %ul
   %li.active
     = link_to "Ntranslate", root_path, :class => 'brand'
+- if can? :manage, TextResource
+  %li
+    = link_to "Text Resources", project_text_resources_path(@project), :class => 'brand'
