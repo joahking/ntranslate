@@ -15,15 +15,7 @@ class TextResourcesController < ApplicationController
   # GET /text_resources/1
   # GET /text_resources/1.json
   def show
-    @text_resource = if params[:first]
-                       #TODO it should be actually first one not translated
-                       @project.text_resources.first
-                     else
-                       @project.text_resources.find(params[:id])
-                     end
-
-    #TODO take the user's locale
-    #@translation = @text_resource.translations.first # .where(:locale => current_user.locale)
+    @text_resource = @project.text_resources.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

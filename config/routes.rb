@@ -5,7 +5,11 @@ Ntranslate::Application.routes.draw do
 
   resources :projects do
     resources :text_resources
-    get "translate" => 'text_resources#translate', :first => true
+    member do
+      scope ':locale' do
+        resources :translations, :only => [:index, :create]
+      end
+    end
   end
 
   match '/auth/:provider/callback', :to => 'sessions#create'
