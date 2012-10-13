@@ -23,6 +23,10 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 
 gem 'capistrano'
 
+group :test do
+  gem 'database_cleaner'
+end
+
 group :production do
   gem 'mysql2' # If using mysql in development, this can be outside the production group.
   gem 'therubyracer'
