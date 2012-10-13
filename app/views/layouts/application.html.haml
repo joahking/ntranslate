@@ -22,7 +22,6 @@
               = link_to 'Edit account', edit_user_registration_path
             - else
               = link_to 'Sign up', new_user_registration_path
-          .clr
           .logo
             %a{:href => "index.html"}
               %img{:alt => "logo", :border => "0", :height => "85", :src => image_path("logo.gif"), :width => "324"}/
@@ -32,24 +31,12 @@
                 %span
                   %input#textfield.keywords{:maxlength => "50", :name => "q", :type => "text", :value => "Search..."}/
                 %input.button{:name => "b", :src => image_path("search.gif"), :type => "image"}/
-          .clr
-          .menu_resize
-            .menu
-              = render 'layouts/navigation'
-            .clr
-          .clr
-        .clr
-      .clr
-      .header_text_bg
-        .header_text
-          .gallery
-            GALLERY
-          .clr
-        .clr
-      .body_resize
-        .body
-          = render 'layouts/messages'
-          = yield
+          .menu
+            = render 'layouts/navigation'
+
+      .body
+        = render 'layouts/messages'
+        = yield
     .footer
       .footer_resize
         %a{:href => "#"}
