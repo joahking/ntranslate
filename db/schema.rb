@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013153621) do
+ActiveRecord::Schema.define(:version => 20121013155242) do
 
   create_table "identities", :force => true do |t|
     t.string   "provider"
@@ -37,9 +37,10 @@ ActiveRecord::Schema.define(:version => 20121013153621) do
   create_table "text_resource_translations", :force => true do |t|
     t.integer  "text_resource_id"
     t.text     "content"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "locale"
+    t.boolean  "translated",       :default => false
   end
 
   add_index "text_resource_translations", ["text_resource_id"], :name => "index_translations_on_text_resource_id"
