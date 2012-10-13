@@ -12,6 +12,6 @@ class TextResource < ActiveRecord::Base
   delegate :master_language, :to => :project
 
   def original_content
-    self.send :"content_#{master_language}"
+    content_for(master_language)
   end
 end
