@@ -15,13 +15,13 @@ class TextResource < ActiveRecord::Base
   private
 
   def set_content
-    master_translation.content = @content
+    master_translation.content = @content if @content
   end
 
   def master_translation
     master_language = project.master_language
-    translation = self.translations.detect { |x| x.language_id = master_language.id }
-    translation ||= find_or_initialize_by_language_id(master_language.id)
+    translation = self.translations.detect { |x| x.language = master_language }
+    translation ||= self.translations.find_or_initialize_by_language(master_language)
   end
 
 end

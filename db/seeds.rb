@@ -156,25 +156,19 @@ Language.delete_all
   end
 
 #
-# Projects / Language Assignments
+# Projects
 #
 
-Project.delete_all
-LanguageAssignment.delete_all
-
 LANGUAGES = %w{en es de}
-MASTER_LANGUAGE = "en"
 
-master_language = Language.find_by_iso_code(MASTER_LANGUAGE)
-project = Project.new :name => "Devise"
+Project.delete_all
 
-LANGUAGES.each do |language|
-  la = project.language_assignments.new
-  la.language = Language.find_by_iso_code(language)
-  la.master_language = master_language# unless language == MASTER_LANGUAGE
+project = Project.create! do |project|
+  project.name = "Devise"
+  project.master_language = "en"
+  project.languages = LANGUAGES
 end
 
-project.save!
 #
 # Text Resources / Translations
 #
@@ -202,10 +196,10 @@ end
 
 LANGUAGES.each do |language|
   text_resources = Foo.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
-  lang = Language.find_by_iso_code(language)
 
   text_resources.each do |k, v|
-    tr = TextResource.find_or_create_by_key_and_project_id!(k, project.id)
-    tr.translations.create!(content: v, language_id: lang.id)
+    tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
+    tr.translations.build(content: v, language: language)
+    tr.save!
   end
 end
