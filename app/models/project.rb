@@ -3,4 +3,5 @@ class Project < ActiveRecord::Base
 
   has_many :language_assignments
   has_many :languages, :through => :language_assignments
+  has_many :text_resources
 end
