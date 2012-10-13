@@ -1,6 +1,6 @@
 = tabs_tag do |tab|
 
-  = tab.home "Ntranslate", root_path
+  = tab.home "Home", root_path
 
   - if @project && @project.persisted?
     = tab.projects @project.name, project_path(@project)
