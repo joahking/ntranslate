@@ -17,4 +17,10 @@ module TranslationMethods
       end
     end
   end
+
+  module InstanceMethods
+    def content_for(locale)
+      I18n.with_locale(locale) { send("content_#{locale}") }
+    end
+  end
 end
