@@ -1,9 +1,10 @@
-= simple_form_for(@user_project) do |f|
-  = f.error_notification
-
+= form_tag(user_user_project_path(@user), :method => :put) do |f|
   .form-inputs
-    = f.input :user
-    = f.input :project
+    %ul
+      - @projects.each do |prj|
+        %li
+          = check_box_tag "projects_ids[]", prj.id, @user.project_ids.include?(prj.id), :id => "project_#{prj.id}"
+          = label_tag "project_#{prj.id}", prj.name
 
   .form-actions
-    = f.button :submit
+    = button_tag :assign

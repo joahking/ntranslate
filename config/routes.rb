@@ -1,7 +1,9 @@
 Ntranslate::Application.routes.draw do
-  resources :user_projects
+  resources :user_projects, :only => [:index]
 
-  resources :users
+  resources :users do
+    resources :user_projects, :only => [:edit, :update]
+  end
 
   resources :projects do
     resources :text_resources

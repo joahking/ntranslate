@@ -1,7 +1,5 @@
-%h1 Editing user_project
+%h1= "Assign projects to user #{@user.name}"
 
 = render 'form'
 
-= link_to 'Show', @user_project
-\|
 = link_to 'Back', user_projects_path
