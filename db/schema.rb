@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013062143) do
+ActiveRecord::Schema.define(:version => 20121013065528) do
+
+  create_table "language_assignments", :force => true do |t|
+    t.integer "project_id"
+    t.integer "language_id"
+    t.integer "master_language_id"
+  end
+
+  add_index "language_assignments", ["project_id"], :name => "index_language_assignments_on_project_id"
 
   create_table "languages", :force => true do |t|
     t.string "name"
