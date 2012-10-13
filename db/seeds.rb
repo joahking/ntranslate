@@ -176,26 +176,8 @@ end
 TextResource.delete_all
 Translation.delete_all
 
-module Foo
-  def self.get_names(hash={}, options={})
-    options[:names] ||= {}
-
-    hash.each do |k,v|
-      prefix = options[:prefix] ? [options[:prefix], k].join(".") : k
-
-      if v.kind_of? Hash
-        get_names v, options.merge(:prefix => prefix)
-      else
-        options[:names][prefix] = v
-      end
-    end
-
-    options[:names]
-  end
-end
-
 LANGUAGES.each do |language|
-  text_resources = Foo.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
+  text_resources = ResourceNameExtractor.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
 
   text_resources.each do |k, v|
     tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
