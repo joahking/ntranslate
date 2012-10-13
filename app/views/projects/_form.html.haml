@@ -1,8 +1,8 @@
-= simple_form_for(@project) do |f|
+= simple_form_for(@project, :html => {:class => 'project create'}) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :name
+    = f.input :name, :wrapper_html => {:class => 'name'}
 
     = f.input :languages, :collection => Language.all.map {|l| [l.name, l.iso_code]}, :as => :check_boxes
 
