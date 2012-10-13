@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :identities, :dependent => :destroy
+  has_many :user_projects, :dependent => :destroy
+  has_many :projects, :through => :user_projects
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :avatar
 
