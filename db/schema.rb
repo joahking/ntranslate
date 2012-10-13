@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013115112) do
+ActiveRecord::Schema.define(:version => 20121013133450) do
+
   create_table "identities", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -33,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20121013115112) do
     t.text     "languages"
   end
 
+  create_table "text_resource_translations", :force => true do |t|
+    t.integer  "text_resource_id"
+    t.text     "content"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "locale"
+  end
+
+  add_index "text_resource_translations", ["text_resource_id"], :name => "index_translations_on_text_resource_id"
+
   create_table "text_resources", :force => true do |t|
     t.integer  "project_id"
     t.string   "key"
@@ -41,16 +52,6 @@ ActiveRecord::Schema.define(:version => 20121013115112) do
   end
 
   add_index "text_resources", ["project_id", "key"], :name => "index_text_resources_on_project_id_and_key", :unique => true
-
-  create_table "translations", :force => true do |t|
-    t.integer  "text_resource_id"
-    t.text     "content"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.string   "language"
-  end
-
-  add_index "translations", ["text_resource_id"], :name => "index_translations_on_text_resource_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false

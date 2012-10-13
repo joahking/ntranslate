@@ -174,14 +174,14 @@ end
 #
 
 TextResource.delete_all
-Translation.delete_all
+TextResourceTranslation.delete_all
 
 LANGUAGES.each do |language|
   text_resources = ResourceNameExtractor.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
 
   text_resources.each do |k, v|
     tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
-    tr.translations.build(content: v, language: language)
+    tr.send :"content_#{language}=", v
     tr.save!
   end
 end

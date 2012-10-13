@@ -23,6 +23,7 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 gem 'omniauth-github'
 
 gem 'capistrano'
+gem 'puret'
 
 group :development do
   gem 'thin'
