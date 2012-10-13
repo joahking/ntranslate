@@ -7,12 +7,12 @@
     %th
     %th
 
-  - @projects.each do |project|
-    %tr
-      %td= project.name
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+  - @projects.in_groups_of(2) do |projects|
+    %tr{ :class => cycle("odd", "even") }
+      %td{ :class => :left }
+        = render "project", :project => projects.first
+      %td{ :class => :right }
+        = render "project", :project => projects.last
 
 %br
 
