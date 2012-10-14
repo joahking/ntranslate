@@ -43,7 +43,8 @@ class TextResourcesController < ApplicationController
   # POST /text_resources
   # POST /text_resources.json
   def create
-    @text_resource = @project.text_resources.build(params[:text_resource])
+    @text_resource = TextResource.new(:project_id => @project.id)
+    @text_resource.attributes = params[:text_resource]
 
     respond_to do |format|
       if @text_resource.save
