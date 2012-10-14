@@ -1,5 +1,6 @@
 class ImportsController < ApplicationController
   before_filter :find_project
+  before_filter :set_text_resources_tab
 
   def index
   end

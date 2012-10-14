@@ -35,4 +35,7 @@ protected
     set_tab controller_name
   end
 
+  def set_text_resources_tab
+    set_tab "text_resources"
+  end
 end

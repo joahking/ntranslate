@@ -42,8 +42,4 @@ class TranslationsController < ApplicationController
   def set_locale
     @locale = params[:locale]
   end
-
-  def set_text_resources_tab
-    set_tab "text_resources"
-  end
 end
