@@ -33,6 +33,6 @@ class User < ActiveRecord::Base
 private
 
   def set_default_role
-    self.role ||= "translator"
+    self.role ||= "admin"
   end
 end
