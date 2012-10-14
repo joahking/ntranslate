@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
 
   serialize :languages
 
-  validates :name, :presence => true
+  validates :name, :presence => true, :format => { :with => /\A[a-zA-Z0-9\-_]+\z/, :message => "Only letters, numbers, - and _ are allowed" }
   validates :languages, :presence => true
 
   before_save :clean_languages
