@@ -1,6 +1,7 @@
 class TranslationsController < ApplicationController
   before_filter :find_project
   before_filter :set_locale
+  before_filter :set_text_resources_tab
 
   def index
     text_resources_to_translate = @project.text_resources.pending_translation(@locale)
@@ -40,5 +41,9 @@ class TranslationsController < ApplicationController
 
   def set_locale
     @locale = params[:locale]
+  end
+
+  def set_text_resources_tab
+    set_tab "text_resources"
   end
 end
