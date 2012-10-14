@@ -1,3 +1,43 @@
 // Place all the styles related to the text_resources controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.text-resources.list {
+  overflow: hidden;
+
+  .title {
+    display: inline-block;
+  }
+
+  .add {
+    float: right;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+
+    tr:nth-child(odd) {
+      background: white;
+    }
+
+    tr:nth-child(even)  {
+      background: #f6f6f6;
+    }
+
+    tr {
+      td:nth-child(1) {
+        padding-left: 15px;
+      }
+    }
+
+    td {
+      line-height: 25px;
+
+      img {
+        padding-top: 8px;
+      }
+    }
+  }
+}
