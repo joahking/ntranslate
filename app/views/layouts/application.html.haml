@@ -17,7 +17,6 @@
           - if signed_in?
             = welcome_user
             %span.auth_provider
-              |
               = link_to "Sign out", signout_path
           - else
             %a{:href => "/auth/github", :class => "auth_provider"}
