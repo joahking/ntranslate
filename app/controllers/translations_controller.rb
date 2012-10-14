@@ -5,11 +5,10 @@ class TranslationsController < ApplicationController
   def index
     text_resources_to_translate = @project.text_resources.pending_translation(@locale)
     @text_resource = if params[:skip]
-                       text_resources_to_translate.
-                         where("text_resources.id > ?", params[:skip]).first
-                     else
-                       text_resources_to_translate.first
+                       text_resources_to_translate.where("text_resources.id > ?", params[:skip]).first
                      end
+    # if you skipped last one (bigger id), start from the beginning
+    @text_resource = text_resources_to_translate.first unless @text_resource
 
     unless @text_resource
       redirect_to projects_path
