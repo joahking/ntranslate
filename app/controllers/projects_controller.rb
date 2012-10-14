@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  set_tab :home, :only => %w(index)
+  set_tab :home, :except => %w(show)
 
   before_filter :authorize, :except => [:index, :show]
 
