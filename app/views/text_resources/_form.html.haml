@@ -2,8 +2,8 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :key, :required => true, :wrapper_html => { :class => "key" }
-    = f.input :original_content, :as => :text, :label => "Content", :required => true
+    = f.input :key, :required => true, :wrapper_html => { :class => "key" }, :hint => "i18n key of the text, e.g. rails.rumble.welcome"
+    = f.input :original_content, :as => :text, :label => "Content", :required => true, :hint => "#{humanize_locale(@project.master_language)} text to translate."
 
   .form-actions
     = f.button :submit

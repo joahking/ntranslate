@@ -1,3 +1,7 @@
-%h1 New text resource
+%h1.title New text resource for project #{@project.name}
+%br
+%p
+  = "Create a #{humanize_locale(@project.master_language)} text resource to translate."
+%br
 
 = render 'form'
