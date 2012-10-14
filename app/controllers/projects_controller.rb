@@ -77,6 +77,10 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+
+    flash[:error] = "Nice try. We've disabled project deletion until the rumble is over. ;-)"
+    redirect_to projects_url and return
+
     @project = Project.find(params[:id])
     @project.destroy
 
