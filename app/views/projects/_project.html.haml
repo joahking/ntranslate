@@ -1,7 +1,5 @@
 .name
   = link_to project.name, project
-= "#{pluralize(project.text_resources.count, "text").gsub('  ','')} to translate"
-
 
 - for language in project.languages
   = render :partial => "language", :locals => { :project => project, :language => language }
