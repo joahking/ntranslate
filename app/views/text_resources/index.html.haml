@@ -1,6 +1,8 @@
 .text-resources.list
   %h1.title Text resources for #{@project.name}
 
+  = link_to "Add new text resource", new_project_text_resource_path(@project), :class => 'add btn'
+
   %table
     %tr
       %th
@@ -13,4 +15,3 @@
         %td= link_to image_tag("icons/pencil.png"), edit_project_text_resource_path(@project, text_resource)
         %td= link_to image_tag("icons/delete.png"), project_text_resource_path(@project, text_resource), method: :delete, data: { confirm: 'Are you sure?' }
   = will_paginate @text_resources
-  = link_to "Add new text resource", new_project_text_resource_path(@project), :class => 'add btn'

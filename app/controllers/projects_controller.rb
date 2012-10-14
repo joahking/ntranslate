@@ -6,8 +6,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all(:include => :text_resources).
-      paginate(:page => params[:page], :per_page => 8)
+    @projects = Project.page(params[:page]).per_page(8).
+      all(:include => :text_resources)
 
     respond_to do |format|
       format.html # index.html.erb
