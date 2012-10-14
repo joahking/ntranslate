@@ -24,6 +24,14 @@ class TranslationsController < ApplicationController
     end
   end
 
+  def suggestion
+    @text_resource = TextResource.find(params[:translation_id])
+
+    respond_to do |format|
+      format.js { render :json => { :text => @text_resource.suggestion(@locale) } }
+    end
+  end
+
   private
 
   def find_project

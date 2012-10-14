@@ -12,7 +12,9 @@ Ntranslate::Application.routes.draw do
       get "import", :to => "imports#index"
       post "import", :to => "imports#upload", :as => :import
       scope ':locale', :constraints => {:locale => /[a-z]{2}/} do
-        resources :translations, :only => [:index, :create]
+        resources :translations, :only => [:index, :create] do
+          get :suggestion
+        end
       end
     end
   end

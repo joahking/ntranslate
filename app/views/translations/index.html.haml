@@ -25,7 +25,6 @@
         Suggestion:
 
         %span
-          = @text_resource.suggestion(@locale)
 
     = f.hidden_field :id
 
@@ -40,5 +39,14 @@
 
     suggestion.click(function () {
       newTranslation.text(suggestion.text().trim());
+    });
+
+    $.ajax({
+      url: "#{translation_suggestion_path(@project, @locale, @text_resource.id)}",
+      method: 'get',
+      dataType: 'json',
+      success: function(data) {
+        suggestion.html(data.text);
+      }
     });
   });

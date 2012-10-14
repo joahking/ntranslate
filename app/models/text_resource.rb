@@ -29,7 +29,17 @@ class TextResource < ActiveRecord::Base
   end
 
   def suggestion(language)
-    translator.translate original_content, :from => master_language, :to => language
+    text = original_content
+    re = /\%\{[\w]+\}/
+    matches = text.scan(re)
+    matches.each_with_index do |m, i|
+      text.sub!(/#{m}/, "__#{i}__")
+    end
+    text = translator.translate text, :from => master_language, :to => language
+    matches.each_with_index do |m, i|
+      text.sub!(/__#{i}__/, m)
+    end
+    text
   end
 
   after_save :expire
