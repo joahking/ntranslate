@@ -28,6 +28,10 @@ class Project < ActiveRecord::Base
     "#{id}-#{name.downcase}"
   end
 
+  def languages_records
+    Language.where("iso_code in (?)", languages)
+  end
+
 private
 
   def clean_languages

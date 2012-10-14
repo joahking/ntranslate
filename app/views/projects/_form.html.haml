@@ -3,8 +3,8 @@
 
   .form-inputs
     = f.input :name, :wrapper_html => {:class => 'name'}, :hint  => 'Please choose a nice short name for your project'
-    = f.input :master_language, :collection => Language.ordered.map {|l| [l.name, l.iso_code]}, :as => :select
-    = f.input :languages, :collection => Language.ordered.map {|l| [l.name, l.iso_code]}, :as => :check_boxes, :hint  => 'These are the languages you would like to have your text resources translated to.'
+    = f.input :master_language, :collection => languages_collection(@project.languages_records), :as => :select, :selected => @project.master_language
+    = f.input :languages, :collection => languages_collection, :as => :check_boxes, :hint  => 'These are the languages you would like to have your text resources translated to.'
 
   .form-actions
     = f.button :submit
