@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :key
-    = f.input :"content_#{@project.master_language}", :label => "Content"
+    = f.input :"content_#{@project.master_language}", :as => :text, :label => "Content"
 
   .form-actions
     = f.button :submit
