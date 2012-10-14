@@ -6,4 +6,8 @@ module ApplicationHelper
     #      end
     "Welcome #{img} #{current_user.name}".html_safe
   end
+
+  def humanize_locale(iso_code)
+    Language.where(:iso_code => iso_code).first.name
+  end
 end

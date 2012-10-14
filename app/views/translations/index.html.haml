@@ -1,13 +1,17 @@
 %div
-  = @text_resource.key
+  %h3= "Translating #{@text_resource.key}"
+
+  = "Still #{@project.text_resources.pending_translation(params[:locale]).count} texts to translate"
 
 = form_for(@text_resource, :url => translations_path(@project, params[:locale]), :method => :post) do |f|
-  %sdiv.original
-    = f.label @text_resource.master_language
+  %div.left
+    = f.label "From: #{humanize_locale(@text_resource.master_language)}"
+    %br
     = f.text_area :original_content, :disabled => true
 
-  %div.new
-    = f.label params[:locale]
+  %div.right
+    = f.label "To: #{humanize_locale(params[:locale])}"
+    %br
     = f.text_area :"content_#{params[:locale]}"
 
   = f.hidden_field :id
