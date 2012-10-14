@@ -1,11 +1,23 @@
 .name
-  = link_to project.name, project
+  .links
+    = link_to project.name, project, :class => "title"
+    - if can? :manage, Project
+      = link_to image_tag("icons/pencil.png", :title => "Edit"), edit_project_path(project)
+      = link_to image_tag("icons/delete.png", :title => "Delete"), project, method: :delete, data: { confirm: 'Are you sure?' }
+      = link_to image_tag("icons/page_white_get.png", :title => "Import"), "/"
+      = link_to image_tag("icons/page_white_ruby.png", :title => "Export as YAML"), export_project_path(project, :format => 'yaml')
+      = link_to image_tag("icons/page_white_put.png", :title => "Export as JSON"),  export_project_path(project, :format => 'json')
 
-- for language in project.languages
-  = render :partial => "language", :locals => { :project => project, :language => language }
+  .image
+    = link_to project do
+      = random_logo(project)
+
+- if project.text_resources.count == 0
+  Nothing to translate
+- else
+  - for language in project.languages
+    = render :partial => "language", :locals => { :project => project, :language => language }
 
 - if can? :manage, Project
   &nbsp;
-  = link_to 'Edit', edit_project_path(project)
   &nbsp;
-  = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }

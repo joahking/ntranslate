@@ -1,11 +1,8 @@
 .language-stats
-  = image_tag "flag_#{language}.png"
   - if language == project.master_language
     = "#{project.text_resources_count} text resources in total"
   - else
     - if project.has_pending_translations?(language)
-      = project.pending_translations_count(language)
-      texts resources to
-      = link_to "translate!", translations_path(project, language)
+      = link_to_translate(project, language)
     - else
       Nothing to translate

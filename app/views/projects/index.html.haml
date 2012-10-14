@@ -1,8 +1,10 @@
 .project.list
 
-  - @projects.each do |projects|
-    .translation-project
-      = render "project", :project => projects
+  - @projects.in_groups_of(2, false) do |projects|
+    .row
+      - projects.each do |project|
+        .translation-project
+          = render "project", :project => project
 
   - if can? :manage, Project
     .actions
