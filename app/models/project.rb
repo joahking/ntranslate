@@ -25,7 +25,7 @@ class Project < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{name}"
+    "#{id}-#{name.downcase}"
   end
 
 private
