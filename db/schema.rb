@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013180457) do
+ActiveRecord::Schema.define(:version => 20121014093020) do
 
   create_table "identities", :force => true do |t|
     t.string   "provider"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(:version => 20121013180457) do
   create_table "text_resources", :force => true do |t|
     t.integer  "project_id"
     t.string   "key"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "array",      :default => false
   end
 
   add_index "text_resources", ["project_id", "key"], :name => "index_text_resources_on_project_id_and_key", :unique => true

@@ -7,7 +7,7 @@ module ResourceNameExtractor
         traverse v, options.merge(:prefix => prefix), &block
       elsif v.kind_of? Array
         yield :type => Array, :key => prefix, :value => v.join("\n")
-      else
+      elsif v.present?
         yield :type => String, :key => prefix, :value => v
       end
     end
