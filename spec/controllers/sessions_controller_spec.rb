@@ -12,12 +12,10 @@ describe SessionsController do
       })
     # etc.
     })
-    request.env["devise.mapping"] = Devise.mappings[:user]
     request.env["omniauth.auth"]  = OmniAuth.config.mock_auth[:github]
   end
 
-  #integration spec in a controller one!
-  it "should create user" do
+  it "should authenticate github users" do
     visit root_path
     click_link "Sign in with Github"
     page.should have_content("Signed in!")
