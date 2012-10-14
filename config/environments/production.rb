@@ -65,4 +65,21 @@ Ntranslate::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.action_mailer.default_url_options = { :host => 'ntranslate.r12.railsrumble.com' }
+
+  email_config = YAML.load_file("#{Rails.root.to_s}/config/email.yml")["production"]
+  # ActionMailer::Base
+  config.action_mailer.smtp_settings = {
+    :address => email_config["address"],
+    :port => email_config["port"],
+    :domain => email_config["domain"],
+    :user_name => email_config["user_name"],
+    :password => email_config["password"],
+    :authentication => email_config["authentication"],
+    :enable_starttls_auto => email_config["enable_starttls_auto"]
+  }
+
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[nTranslate] ",
+    :sender_address => %{"ntranslate app" <notifier@ntranslate.com>},
+    :exception_recipients => %w{dias_jorge@yahoo.com eth0.lo@gmail.com joahking@gmail.com erick.dennis@gmail.com}
 end

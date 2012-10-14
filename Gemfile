@@ -28,6 +28,7 @@ gem 'puret'
 gem 'rubyzip'
 gem 'bing_translator'
 gem 'will_paginate', '~> 3.0'
+gem 'exception_notification'
 
 group :development do
   gem 'thin'
