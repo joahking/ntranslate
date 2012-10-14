@@ -1,1 +1,36 @@
-= render "project", :project => @project
+%h1.title
+  = @project.name
+
+.project-block.info
+  = random_logo(@project, :size => :big)
+
+  .project-translation-stats
+    - if @project.text_resources.count == 0
+      Nothing to translate
+    - else
+      - for language in @project.languages
+        = render :partial => "language", :locals => { :project => @project, :language => language }
+
+- if can? :manage, Project
+  .project-block.manage
+    %h4
+      Manage your project
+    %ul
+      %li
+        = link_to edit_project_path(@project) do
+          Edit #{image_tag("icons/pencil.png", :title => "Edit")}
+      %li
+        = link_to(@project, method: :delete, data: { confirm: 'Are you sure?' }) do
+          Delete #{image_tag("icons/delete.png", :title => "Delete")}
+      %li
+        = link_to new_project_text_resource_path(@project) do
+          Add new text resource #{image_tag("icons/add.png", :title => "Add")}
+      %li
+        = link_to import_project_path(@project) do
+          Bulk import text resources #{image_tag("icons/page_white_get.png", :title => "Import")}
+      %li
+        = link_to export_project_path(@project, :format => 'yaml') do
+          Export as YAML #{image_tag("icons/page_white_ruby.png", :title => "Export as YAML")}
+      %li
+        = link_to export_project_path(@project, :format => 'json') do
+          Export as JSON #{image_tag("icons/page_white_put.png", :title => "Export as JSON")}

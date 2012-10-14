@@ -6,9 +6,15 @@ module ProjectsHelper
     "#{humanize_locale(language)}: #{resources_text} to #{link}".html_safe
   end
 
-  def random_logo(project)
+  def random_logo(project, options = {})
+    size = if options[:size] == :big
+             "400/200"
+           else
+             "200/100"
+           end
+
     image_id = project.id % 10
-    image_tag "http://lorempixel.com/200/100/nature/#{image_id}/LOGO"
+    image_tag "http://lorempixel.com/#{size}/nature/#{image_id}/LOGO"
   end
 
 end
