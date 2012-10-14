@@ -5,7 +5,7 @@ class TextResourcesController < ApplicationController
   # GET /text_resources
   # GET /text_resources.json
   def index
-    @text_resources = TextResource.all
+    @text_resources = @project.text_resources
 
     respond_to do |format|
       format.html # index.html.erb
