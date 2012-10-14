@@ -5,12 +5,16 @@
 
 = form_for(@text_resource, :url => translations_path(@project, params[:locale]), :method => :post) do |f|
   %div.left
-    = f.label "From: #{humanize_locale(@text_resource.master_language)}"
+    From
+    = image_tag "flag_#{@text_resource.master_language}.png"
+    = humanize_locale(@text_resource.master_language)
     %br
     = f.text_area :original_content, :disabled => true
 
   %div.right
-    = f.label "To: #{humanize_locale(params[:locale])}"
+    To
+    = image_tag "flag_#{params[:locale]}.png"
+    = humanize_locale(params[:locale])
     %br
     = f.text_area :"content_#{params[:locale]}"
 
