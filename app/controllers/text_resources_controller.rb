@@ -37,12 +37,7 @@ class TextResourcesController < ApplicationController
 
   # GET /text_resources/1/edit
   def edit
-    @text_resource = if params[:first]
-                       #TODO it should be actually first one not translated
-                       @project.text_resources.first
-                     else
-                       @project.text_resources.find(params[:id])
-                     end
+    @text_resource = @project.text_resources.find(params[:id])
   end
 
   # POST /text_resources
@@ -52,7 +47,7 @@ class TextResourcesController < ApplicationController
 
     respond_to do |format|
       if @text_resource.save
-        format.html { redirect_to [@project, @text_resource], notice: 'Text resource was successfully created.' }
+        format.html { redirect_to project_text_resources_path(@project), notice: 'Text resource was successfully created.' }
         format.json { render json: @text_resource, status: :created, location: @text_resource }
       else
         format.html { render action: "new" }
@@ -68,7 +63,7 @@ class TextResourcesController < ApplicationController
 
     respond_to do |format|
       if @text_resource.update_attributes(params[:text_resource])
-        format.html { redirect_to [@project, @text_resource], notice: 'Text resource was successfully updated.' }
+        format.html { redirect_to project_text_resources_path(@project), notice: 'Text resource was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -84,7 +79,7 @@ class TextResourcesController < ApplicationController
     @text_resource.destroy
 
     respond_to do |format|
-      format.html { redirect_to text_resources_url }
+      format.html { redirect_to project_text_resources_path(@project) }
       format.json { head :no_content }
     end
   end
