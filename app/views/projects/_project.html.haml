@@ -4,7 +4,7 @@
     - if can? :manage, Project
       = link_to image_tag("icons/pencil.png", :title => "Edit"), edit_project_path(project)
       = link_to image_tag("icons/delete.png", :title => "Delete"), project, method: :delete, data: { confirm: 'Are you sure?' }
-      = link_to image_tag("icons/page_white_get.png", :title => "Import"), "/"
+      = link_to image_tag("icons/page_white_get.png", :title => "Import"), import_project_path(project)
       = link_to image_tag("icons/page_white_ruby.png", :title => "Export as YAML"), export_project_path(project, :format => 'yaml')
       = link_to image_tag("icons/page_white_put.png", :title => "Export as JSON"),  export_project_path(project, :format => 'json')
 

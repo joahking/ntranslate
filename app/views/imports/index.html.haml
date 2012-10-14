@@ -1,0 +1,3 @@
+= simple_form_for(@project, :url => import_project_path(@project), :method => :post, :html => {:multipart => true}) do |f|
+  = f.file_field :file
+  = f.submit "Upload!"
