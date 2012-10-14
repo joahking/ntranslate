@@ -33,11 +33,11 @@ class TextResource < ActiveRecord::Base
     re = /\%\{[\w]+\}/
     matches = text.scan(re)
     matches.each_with_index do |m, i|
-      text.sub!(/#{m}/, "__#{i}__")
+      text.sub!(/#{m}/, "XX#{i}XX")
     end
     text = translator.translate text, :from => master_language, :to => language
     matches.each_with_index do |m, i|
-      text.sub!(/__#{i}__/, m)
+      text.sub!(/XX#{i}XX/, m)
     end
     text
   end
