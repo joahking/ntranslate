@@ -169,12 +169,12 @@ TextResourceTranslation.delete_all
   name = name.downcase
 
   LANGUAGES.each do |language|
-    text_resources = ResourceNameExtractor.get_names(YAML.load_file(Rails.root.join("db/seeds/#{name}/#{language}.yml"))[language])
-
-    text_resources.each do |k, v|
-      tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
-      tr.send :"content_#{language}=", v
+    data = YAML.load_file(Rails.root.join("db/seeds/#{name}/#{language}.yml"))[language]
+    ResourceNameExtractor.traverse(data) do |args|
+      tr = TextResource.find_or_initialize_by_key_and_project_id(args[:key], project.id)
+      tr.send :"content_#{language}=", args[:value]
       tr.save!
+      puts args.inspect
     end
   end
 end

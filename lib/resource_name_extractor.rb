@@ -1,19 +1,15 @@
 module ResourceNameExtractor
-  def self.get_names(hash={}, options={})
-    options[:names] ||= {}
-
+  def self.traverse(hash={}, options={}, &block)
     hash.each do |k,v|
       prefix = options[:prefix] ? [options[:prefix], k].join(".") : k
 
       if v.kind_of? Hash
-        get_names v, options.merge(:prefix => prefix)
+        traverse v, options.merge(:prefix => prefix), &block
       elsif v.kind_of? Array
-        options[:names][prefix] = v.join("\n")
+        yield :type => Array, :key => prefix, :value => v.join("\n")
       else
-        options[:names][prefix] = v
+        yield :type => String, :key => prefix, :value => v
       end
     end
-
-    options[:names]
   end
 end
