@@ -4,7 +4,7 @@
   .form-inputs
     = f.input :name, :wrapper_html => {:class => 'name'}
 
-    = f.input :languages, :collection => Language.order(:name).map {|l| [l.name, l.iso_code]}, :as => :check_boxes
+    = f.input :languages, :collection => Language.ordered.map {|l| [l.name, l.iso_code]}, :as => :check_boxes
 
   .form-actions
     = f.button :submit
