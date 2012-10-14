@@ -7,7 +7,7 @@
   = render :partial => "language", :locals => { :project => project, :language => language }
 
 - if can? :manage, Project
-  &nbsp; 
+  &nbsp;
   = link_to 'Edit', edit_project_path(project)
-  &nbsp; 
+  &nbsp;
   = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }

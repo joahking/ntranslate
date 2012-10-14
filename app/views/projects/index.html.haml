@@ -1,8 +1,9 @@
-.project.list  
-  
+.project.list
+
   - @projects.each do |projects|
     .translation-project
       = render "project", :project => projects
 
-  .actions
-    = link_to 'New Project', new_project_path, :class => 'btn' if can? :manage, Project
+  - if can? :manage, Project
+    .actions
+      = link_to 'New Project', new_project_path, :class => 'btn'

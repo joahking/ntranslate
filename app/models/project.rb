@@ -12,6 +12,10 @@ class Project < ActiveRecord::Base
 
   before_save :clean_languages
 
+  def has_pending_translations?(locale)
+    text_resources.pending_translation(locale).count > 0
+  end
+
 private
 
   def clean_languages

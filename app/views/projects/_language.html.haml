@@ -1,2 +1,4 @@
-= link_to "Start translating #{language}", translations_path(project, language)
-%br
+.language-stats
+  = image_tag "flag_#{language}.png"
+  - if project.has_pending_translations?(language)
+    = link_to "Translate!", translations_path(project, language)
