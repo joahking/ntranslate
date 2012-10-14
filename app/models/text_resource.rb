@@ -1,13 +1,17 @@
 class TextResource < ActiveRecord::Base
   include TranslationMethods
 
-  attr_accessible :key, :project_id, :content
+  attr_accessible :key, :project_id, :content, :original_content
 
   belongs_to :project
 
   puret :content
 
   attr_translated :content
+
+  validates :key, :presence => true
+
+  validates :original_content, :presence => true
 
   delegate :master_language, :to => :project
 
@@ -20,8 +24,13 @@ class TextResource < ActiveRecord::Base
     content_for(master_language)
   end
 
+  def original_content=(value)
+    self.send(:"content_#{master_language}=", value)
+  end
+
   after_save :expire
 
+  # TODO: Fix this monkey path (Fork puret)
   alias_method :orig_content=, :content=
 
   def content=(value)

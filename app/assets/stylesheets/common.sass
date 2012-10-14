@@ -20,7 +20,7 @@ body
 h1
   font-size: 28px
 
-a 
+a
   text-decoration: none
 
   &:hover
@@ -28,3 +28,18 @@ a
 
 ul
   list-style: none
+
+.alert-error
+  border: 1px solid red
+  background-color: #fdd
+  padding: 4px
+  margin-bottom: 15px
+
+.field_with_errors
+  position: relative
+
+  input, textarea
+    border: 1px solid red
+
+  .error
+    position: absolute

@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :key, :required => true, :wrapper_html => { :class => "key" }
-    = f.input :"content_#{@project.master_language}", :as => :text, :label => "Content", :required => true
+    = f.input :original_content, :as => :text, :label => "Content", :required => true
 
   .form-actions
     = f.button :submit
