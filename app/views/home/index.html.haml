@@ -1,12 +1,12 @@
 .home-content
-  
+
   #slider
     %ul
       %li
         = image_tag("projects.png", :class => "left", :size => "910x500")
       %li
         = image_tag("text_resorces.png", :class => "left", :size => "910x500")
-      %li 
+      %li
         = image_tag("translate.png", :class => "left", :size => "910x500")
 
 
@@ -27,10 +27,11 @@
 
 :javascript
 
-$(document).ready(function(){ 
+$(document).ready(function(){
   $("#slider").easySlider({
-    auto: true, 
-    continuous: true
-  }); 
+    auto: true,
+    continuous: true,
+    speed: 700,
+    pause: 3000
+  });
 });
-
