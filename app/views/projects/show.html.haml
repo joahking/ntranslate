@@ -5,11 +5,7 @@
   = random_logo(@project, :size => :big)
 
   .project-translation-stats
-    - if @project.text_resources.count == 0
-      Nothing to translate
-    - else
-      - for language in @project.languages
-        = render :partial => "language", :locals => { :project => @project, :language => language }
+    = render "language_statistics", :project => @project
 
 - if can? :manage, Project
   .project-block.manage
