@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
 
   validates :name, :presence => true, :format => { :with => /\A[a-zA-Z0-9\-_]+\z/, :message => "Only letters, numbers, - and _ are allowed" }
   validates :languages, :master_language, :presence => true
+  validate :languages_contain_master_language
 
   before_save :clean_languages
 
@@ -38,4 +39,9 @@ private
     languages.delete_if(&:blank?)
   end
 
+  def languages_contain_master_language
+    if languages.exclude? master_language
+      errors.add(:master_language, "Should be one of the languages")
+    end
+  end
 end

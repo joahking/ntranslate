@@ -3,8 +3,15 @@
 
   .form-inputs
     = f.input :name, :wrapper_html => {:class => 'name'}, :hint  => 'Please choose a nice short name for your project'
-    = f.input :master_language, :collection => languages_collection(@project.languages_records), :as => :select, :selected => @project.master_language
+    = f.input :master_language, :collection => languages_collection, :as => :select, :selected => @project.master_language, :include_blank => @project.new_record?
     = f.input :languages, :collection => languages_collection, :as => :check_boxes, :hint  => 'These are the languages you would like to have your text resources translated to.'
 
   .form-actions
     = f.button :submit
+
+:javascript
+  $('#project_master_language').change(function() {
+    var l = $("#project_master_language option:selected").val();
+    var chk = $('#project_languages_' + l);
+    chk.attr('checked', 'checked');
+  });
