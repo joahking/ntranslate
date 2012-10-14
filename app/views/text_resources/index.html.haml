@@ -12,6 +12,7 @@
     - @text_resources.each do |text_resource|
       %tr
         %td= text_resource.key
+        %td= truncate(text_resource.content_for(@project.master_language), :length => 50)
         %td= link_to image_tag("icons/pencil.png"), edit_project_text_resource_path(@project, text_resource)
         %td= link_to image_tag("icons/delete.png"), project_text_resource_path(@project, text_resource), method: :delete, data: { confirm: 'Are you sure?' }
   = will_paginate @text_resources
