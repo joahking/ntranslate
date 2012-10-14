@@ -1,3 +1,8 @@
+%h1.title= "Bulk import for project #{@project.name}"
+%br
+%p
+  = "Import an internationalization yaml file. Make sure you upload the #{humanize_locale(@project.master_language)} version of the file!"
+%br
 = simple_form_for(@project, :url => import_project_path(@project), :method => :post, :html => {:multipart => true}) do |f|
   = f.file_field :file
   = f.submit "Upload!"
