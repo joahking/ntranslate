@@ -6,6 +6,8 @@
         .translation-project
           = render "project", :project => project
 
+  = will_paginate @projects
+
   - if can? :manage, Project
     .actions
       = link_to 'New Project', new_project_path, :class => 'btn'

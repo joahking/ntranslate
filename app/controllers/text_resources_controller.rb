@@ -5,7 +5,8 @@ class TextResourcesController < ApplicationController
   # GET /text_resources
   # GET /text_resources.json
   def index
-    @text_resources = @project.text_resources
+    @text_resources = @project.text_resources.
+      paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
