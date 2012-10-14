@@ -41,3 +41,37 @@
     }
   }
 }
+
+.edit_text_resource, .new_text_resource {
+  margin: 15px auto;
+  width: 580px;
+
+  label {
+    float: left;
+    display: inline-block;
+    width: 100px;
+    margin: 0 15px;
+  }
+
+  .form-actions {
+    overflow: hidden;
+
+    .btn {
+      margin-right: 46px;
+      float: right;
+    }
+  }
+
+  .input {
+    margin-bottom: 15px;
+
+    input[type="text"] {
+      width: 400px;
+    }
+
+    textarea {
+      width: 401px;
+    }
+
+  }
+}
