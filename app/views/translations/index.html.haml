@@ -18,6 +18,9 @@
 
   = f.hidden_field :id
 
+  .suggestion
+    = @text_resource.suggestion(@locale)
+
   %div.center
     = f.button "Save"
     = link_to "Skip", translations_url(@project, @locale, :skip => @text_resource.id)

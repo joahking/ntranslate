@@ -28,6 +28,10 @@ class TextResource < ActiveRecord::Base
     self.send(:"content_#{master_language}=", value)
   end
 
+  def suggestion(language)
+    translator.translate original_content, :from => master_language, :to => language
+  end
+
   after_save :expire
 
   # TODO: Fix this monkey path (Fork puret)
@@ -37,6 +41,8 @@ class TextResource < ActiveRecord::Base
     changed_languages << I18n.locale.to_s
     self.orig_content = value
   end
+
+  private
 
   def expire
     if changed_languages.include?(master_language)
@@ -52,6 +58,10 @@ class TextResource < ActiveRecord::Base
 
   def changed_languages
     @changed_languages ||= []
+  end
+
+  def translator
+    @translator ||= BingTranslator.new("ntranslate",  "Bbb+LPqrT588VVUWSdmC7WjS2pE5ix57Zjfb1vVpwTE=")
   end
 
 end

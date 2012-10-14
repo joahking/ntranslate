@@ -25,6 +25,7 @@ gem 'tabs_on_rails'
 gem 'capistrano'
 gem 'puret'
 gem 'rubyzip'
+gem 'bing_translator'
 
 group :development do
   gem 'thin'
