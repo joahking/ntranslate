@@ -4,7 +4,7 @@ module ApplicationHelper
            image_tag current_user.avatar, :size => "32x32", :alt => current_user.name
          end
 
-    "#{img} Welcome #{current_user.name}".html_safe
+    content_tag(:span, "Welcome #{current_user.name}", :class => "auth_provider") + "&nbsp".html_safe + img
   end
 
   def humanize_locale(iso_code)
