@@ -12,7 +12,7 @@ class TranslationsController < ApplicationController
     @text_resource = text_resources_to_translate.first unless @text_resource
 
     unless @text_resource
-      redirect_to projects_path
+      redirect_to project_path(@project), :notice => "All translations in #{humanize_locale(@locale)} are done!"
     end
   end
 

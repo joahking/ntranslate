@@ -7,10 +7,6 @@ module ApplicationHelper
     content_tag(:span, "Welcome #{current_user.name}", :class => "auth_provider") + "&nbsp".html_safe + img
   end
 
-  def humanize_locale(iso_code)
-    Language.where(:iso_code => iso_code).first.name
-  end
-
   def languages_collection(languages = Language.ordered)
     languages.map {|l| [l.name, l.iso_code]}
   end

@@ -5,4 +5,4 @@
     - if project.has_pending_translations?(language)
       = link_to_translate(project, language)
     - else
-      Nothing to translate
+      = "#{humanize_locale(language)}: Nothing to translate"

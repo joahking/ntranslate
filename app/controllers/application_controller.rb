@@ -38,4 +38,9 @@ protected
   def set_text_resources_tab
     set_tab "text_resources"
   end
+
+  def humanize_locale(iso_code)
+    Language.where(:iso_code => iso_code).first.name
+  end
+  helper_method :humanize_locale
 end
