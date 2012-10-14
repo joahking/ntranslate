@@ -38,7 +38,7 @@
         newTranslation = suggestion.parent().prev();
 
     suggestion.click(function () {
-      newTranslation.text(suggestion.text().trim());
+      newTranslation.val(suggestion.text().trim());
     });
 
     $.ajax({
