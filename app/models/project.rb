@@ -24,6 +24,10 @@ class Project < ActiveRecord::Base
     locale == master_language ? 0 : text_resources.pending_translation(locale).count
   end
 
+  def to_param
+    "#{id}-#{name}"
+  end
+
 private
 
   def clean_languages
