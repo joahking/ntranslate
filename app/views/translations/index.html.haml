@@ -19,7 +19,10 @@
         To
         = humanize_locale @locale
 
-      = f.text_area :"content_#{@locale}"
+      = f.text_area :"content_#{@locale}", :id => "new-translation-content"
+      %br
+      %span{:class => "hint2"}
+        Click on the suggestion below to use it as a draft for the translation.
 
       .suggestion
         Suggestion:
@@ -36,7 +39,7 @@
 :javascript
   $(function (){
     var suggestion = $('.suggestion span'),
-        newTranslation = suggestion.parent().prev();
+        newTranslation = $('#new-translation-content');
 
     suggestion.click(function () {
       newTranslation.val(suggestion.text().trim());
