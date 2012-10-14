@@ -40,7 +40,9 @@ class ExportsController < ApplicationController
       lang_content = {}
       @project.text_resources.each do |text_resource|
         contents = text_resource.key.split(".")
-        contents = contents.reverse.inject(text_resource.content_for(lang)) { |a, n| { n => a } }
+        content = text_resource.content_for(lang)
+        content = content.split("\n") if text_resource.array?
+        contents = contents.reverse.inject(content) { |a, n| { n => a } }
         lang_content.deep_merge!(contents)
       end
       project[lang] = lang_content
