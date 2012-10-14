@@ -1,10 +1,4 @@
 #
-# Users
-#
-
-User.delete_all
-
-#
 # Languages
 #
 
@@ -162,26 +156,25 @@ Language.delete_all
 LANGUAGES = %w{en es de}
 
 Project.delete_all
-
-project = Project.create! do |project|
-  project.name = "Devise"
-  project.master_language = "en"
-  project.languages = LANGUAGES
-end
-
-#
-# Text Resources / Translations
-#
-
 TextResource.delete_all
 TextResourceTranslation.delete_all
 
-LANGUAGES.each do |language|
-  text_resources = ResourceNameExtractor.get_names(YAML.load_file(Rails.root.join("db/seeds/#{language}.yml"))[language])
+%w{Devise Rails-I18n}.each do |name|
+  project = Project.create! do |project|
+    project.name = name
+    project.master_language = "en"
+    project.languages = LANGUAGES
+  end
 
-  text_resources.each do |k, v|
-    tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
-    tr.send :"content_#{language}=", v
-    tr.save!
+  name = name.downcase
+
+  LANGUAGES.each do |language|
+    text_resources = ResourceNameExtractor.get_names(YAML.load_file(Rails.root.join("db/seeds/#{name}/#{language}.yml"))[language])
+
+    text_resources.each do |k, v|
+      tr = TextResource.find_or_initialize_by_key_and_project_id(k, project.id)
+      tr.send :"content_#{language}=", v
+      tr.save!
+    end
   end
 end
