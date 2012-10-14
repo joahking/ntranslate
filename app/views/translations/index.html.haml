@@ -1,26 +1,44 @@
-%div
+%div.translations.index
   %h3= "Translating #{@text_resource.key}"
 
-  = "Still #{@project.text_resources.pending_translation(@locale).count} texts to translate"
+  %div
+    Translations remaining: #{@project.text_resources.pending_translation(@locale).count}
 
-= form_for(@text_resource, :url => translations_path(@project, @locale), :method => :post) do |f|
-  %div.left
-    From
-    = humanize_locale @text_resource.master_language
-    %br
-    = f.text_area :original_content, :disabled => true
+= form_for(@text_resource, :url => translations_path(@project, @locale), :method => :post, :html => { :id => "translation-translate", :class => nil }) do |f|
 
-  %div.right
-    To
-    = humanize_locale @locale
-    %br
-    = f.text_area :"content_#{@locale}"
+  .translation-content-wrapper
+    .translation-content.original
+      .language
+        From
+        = humanize_locale @text_resource.master_language
 
-  = f.hidden_field :id
+      = f.text_area :original_content, :disabled => true
 
-  .suggestion
-    = @text_resource.suggestion(@locale)
+    .translation-content.new
+      .language
+        To
+        = humanize_locale @locale
 
-  %div.center
+      = f.text_area :"content_#{@locale}"
+
+      .suggestion
+        Suggestion:
+
+        %span
+          = @text_resource.suggestion(@locale)
+
+    = f.hidden_field :id
+
+  .form-actions
+    = link_to "Skip", translations_url(@project, @locale, :skip => @text_resource.id), :class => "btn"
     = f.button "Save"
-    = link_to "Skip", translations_url(@project, @locale, :skip => @text_resource.id)
+
+:javascript
+  $(function (){
+    var suggestion = $('.suggestion span'),
+        newTranslation = suggestion.parent().prev();
+
+    suggestion.click(function () {
+      newTranslation.text(suggestion.text().trim());
+    });
+  });
