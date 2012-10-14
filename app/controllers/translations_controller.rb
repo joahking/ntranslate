@@ -1,8 +1,15 @@
 class TranslationsController < ApplicationController
   before_filter :find_project
+  before_filter :set_locale
 
   def index
-    @text_resource = @project.text_resources.pending_translation(params[:locale]).first
+    text_resources_to_translate = @project.text_resources.pending_translation(@locale)
+    @text_resource = if params[:skip]
+                       text_resources_to_translate.
+                         where("text_resources.id > ?", params[:skip]).first
+                     else
+                       text_resources_to_translate.first
+                     end
 
     unless @text_resource
       redirect_to projects_path
@@ -12,7 +19,7 @@ class TranslationsController < ApplicationController
   def create
     @text_resource = @project.text_resources.find(params[:text_resource].delete(:id))
     if @text_resource.update_attributes(params[:text_resource])
-      redirect_to translations_url(@project, params[:locale]), :notice => "Saved translation!"
+      redirect_to translations_url(@project, @locale, :skip => @text_resource.id), :notice => "Saved translation!"
     else
       render :index
     end
@@ -22,5 +29,9 @@ class TranslationsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
+  end
+
+  def set_locale
+    @locale = params[:locale]
   end
 end

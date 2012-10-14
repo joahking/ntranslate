@@ -1,24 +1,25 @@
 %div
   %h3= "Translating #{@text_resource.key}"
 
-  = "Still #{@project.text_resources.pending_translation(params[:locale]).count} texts to translate"
+  = "Still #{@project.text_resources.pending_translation(@locale).count} texts to translate"
 
-= form_for(@text_resource, :url => translations_path(@project, params[:locale]), :method => :post) do |f|
+= form_for(@text_resource, :url => translations_path(@project, @locale), :method => :post) do |f|
   %div.left
     From
     = image_tag "flag_#{@text_resource.master_language}.png"
-    = humanize_locale(@text_resource.master_language)
+    = humanize_locale @text_resource.master_language
     %br
     = f.text_area :original_content, :disabled => true
 
   %div.right
     To
-    = image_tag "flag_#{params[:locale]}.png"
-    = humanize_locale(params[:locale])
+    = image_tag "flag_#{@locale}.png"
+    = humanize_locale @locale
     %br
-    = f.text_area :"content_#{params[:locale]}"
+    = f.text_area :"content_#{@locale}"
 
   = f.hidden_field :id
 
-  = f.button "Save"
-  = f.button "Skip"
+  %div.center
+    = f.button "Save"
+    = link_to "Skip", translations_url(@project, @locale, :skip => @text_resource.id)
