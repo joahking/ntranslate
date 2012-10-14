@@ -32,8 +32,9 @@
             %a{:href => root_url}
               ntranslate
 
-          .menu
-            = render 'layouts/navigation'
+          - if signed_in?
+            .menu
+              = render 'layouts/navigation'
 
       .body-wrapper
         .body
