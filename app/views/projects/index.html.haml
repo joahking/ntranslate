@@ -1,5 +1,9 @@
 .project.list
 
+  - if can? :manage, Project
+    .actions
+      = link_to 'New Project', new_project_path, :class => 'btn'
+
   - @projects.in_groups_of(2, false) do |projects|
     .row
       - projects.each do |project|
@@ -8,6 +12,3 @@
 
   = will_paginate @projects
 
-  - if can? :manage, Project
-    .actions
-      = link_to 'New Project', new_project_path, :class => 'btn'
