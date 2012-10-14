@@ -1,13 +1,36 @@
-%h3 Home
+.home-content
+  
+  #slider
+    %ul
+      %li
+        = image_tag("projects.png", :class => "left", :size => "910x500")
+      %li
+        = image_tag("text_resorces.png", :class => "left", :size => "910x500")
+      %li 
+        = image_tag("translate.png", :class => "left", :size => "910x500")
 
-%p
-  As an administrator you can easily create a new project to manage the translations for
-  your Rails project.  On the project overview page you can quickly view the current status
-  of the pending translations in your project.
-%p
-  As a developer you can create new text resources in the project's default language
-  either one by one or do a bulk import by uploading a YAML file.  When everything has been
-  translated you can just as easily export to YAML or JSON with one click!
-%p
-  As a translator you can navigate through a project's pending translations and comfortably
-  translate with the help of Bing Translator.
+
+  %p
+    = image_tag("projects.png", :class => "left", :size => "150x100")
+    As an administrator you can easily create a new project to manage the translations for
+    your Rails project.  On the project overview page you can quickly view the current status
+    of the pending translations in your project.
+  %p
+    = image_tag("text_resorces.png", :class => "left", :size => "150x100")
+    As a developer you can create new text resources in the project's default language
+    either one by one or do a bulk import by uploading a YAML file.  When everything has been
+    translated you can just as easily export to YAML or JSON with one click!
+  %p
+    = image_tag("translate.png", :class => "left", :size => "150x100")
+    As a translator you can navigate through a project's pending translations and comfortably
+    translate with the help of Bing Translator.
+
+:javascript
+
+$(document).ready(function(){ 
+  $("#slider").easySlider({
+    auto: true, 
+    continuous: true
+  }); 
+});
+
